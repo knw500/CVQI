@@ -6,23 +6,24 @@ from scipy import stats, special, linalg
 from math import sqrt
 import numpy as np
 
-QS=np.array([
-    [1,0,0,0],
-    [0,0,1,0],
-    [0,1,0,0],
-    [0,0,0,1]
-    ])
+def quadSwtich(n):
+    """
+    Returns a matrix that switches the order of the quadratures when applied to a CM or mean value
     
-QS2=np.array([
-    [1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1]
-    ])
+    :param n: number of modes
+    """
+    
+    if n==1:
+        return np.eye(2)
+
+    QS = np.zeros([2*n, 2*n])
+
+    for i in range(0, 2*n, 2):
+        print(i)
+        QS[i, int(i/2)] = 1
+        QS[i+1, n+int(i/2)] = 1
+
+    return QS
 
 class MType():
     HET  = 1
